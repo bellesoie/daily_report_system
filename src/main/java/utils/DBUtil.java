@@ -1,8 +1,10 @@
-package constants;
+package utils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import constants.JpaConst;
 
 public class DBUtil {
 
@@ -13,7 +15,7 @@ public class DBUtil {
         return _getEntityManagerFactory().createEntityManager();
     }
 
-    //EntityManagetFactoryインスタンスを生成
+    //EntityManagerFactoryインスタンスを生成
     private static EntityManagerFactory _getEntityManagerFactory() {
         if (emf == null) {
             emf = Persistence.createEntityManagerFactory(JpaConst.PERSISTENCE_UNIT_NAME);
@@ -21,5 +23,4 @@ public class DBUtil {
 
         return emf;
     }
-
 }
