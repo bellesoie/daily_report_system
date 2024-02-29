@@ -27,18 +27,10 @@ import lombok.Setter;
  */
 @Table(name = JpaConst.TABLE_REP)
 @NamedQueries({
-    @NamedQuery(
-            name = JpaConst.Q_REP_GET_ALL,
-            query = JpaConst.Q_REP_GET_ALL_DEF),
-    @NamedQuery(
-            name = JpaConst.Q_REP_COUNT,
-            query = JpaConst.Q_REP_COUNT_DEF),
-    @NamedQuery(
-            name = JpaConst.Q_REP_GET_ALL_MINE,
-            query = JpaConst.Q_REP_GET_ALL_MINE_DEF),
-    @NamedQuery(
-            name = JpaConst.Q_REP_COUNT_ALL_MINE,
-            query = JpaConst.Q_REP_COUNT_ALL_MINE_DEF)
+        @NamedQuery(name = JpaConst.Q_REP_GET_ALL, query = JpaConst.Q_REP_GET_ALL_DEF),
+        @NamedQuery(name = JpaConst.Q_REP_COUNT, query = JpaConst.Q_REP_COUNT_DEF),
+        @NamedQuery(name = JpaConst.Q_REP_GET_ALL_MINE, query = JpaConst.Q_REP_GET_ALL_MINE_DEF),
+        @NamedQuery(name = JpaConst.Q_REP_COUNT_ALL_MINE, query = JpaConst.Q_REP_COUNT_ALL_MINE_DEF)
 })
 
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)
@@ -74,6 +66,12 @@ public class Report {
      */
     @Column(name = JpaConst.REP_COL_TITLE, length = 255, nullable = false)
     private String title;
+
+    /**
+     * 承認する場合1、承認しない場合0
+     */
+    @Column(name = JpaConst.REP_COL_APPROVAL, nullable = false)
+    private String approval;
 
     /**
      * 日報の内容

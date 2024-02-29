@@ -39,6 +39,11 @@ public class ReportView {
     private String title;
 
     /**
+     * 日報の承認
+     */
+    private String approval;
+
+    /**
      * 日報の内容
      */
     private String content;

@@ -125,6 +125,7 @@ public abstract class ActionBase {
 
         //パラメータからtokenの値を取得
         String _token = getRequestParam(AttributeConst.TOKEN);
+        System.out.println("_token="+_token);
 
         if (_token == null || !(_token.equals(getTokenId()))) {
 

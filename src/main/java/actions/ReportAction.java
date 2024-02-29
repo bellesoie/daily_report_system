@@ -112,6 +112,7 @@ public class ReportAction extends ActionBase {
                     ev, //ログインしている従業員を、日報作成者として登録する
                     day,
                     getRequestParam(AttributeConst.REP_TITLE),
+                    "0",
                     getRequestParam(AttributeConst.REP_CONTENT),
                     null,
                     null);
@@ -158,6 +159,7 @@ public class ReportAction extends ActionBase {
         } else {
 
             putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
+            putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
 
             //詳細画面を表示
             forward(ForwardConst.FW_REP_SHOW);
@@ -232,6 +234,33 @@ public class ReportAction extends ActionBase {
                 redirect(ForwardConst.ACT_REP, ForwardConst.CMD_INDEX);
 
             }
+        }
+    }
+
+    /**
+     * 日報の承認を行う
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void approval() throws ServletException, IOException {
+        System.out.println("a");
+
+        //CSRF対策 tokenのチェック
+        if (checkToken()) {
+            System.out.println("b");
+
+            //idを条件に日報データを取得する
+            ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+
+            //入力された日報内容を設定する
+            rv.setApproval("1");
+
+            //日報を承認する
+            List<String> errors = service.update(rv);
+            putSessionScope(AttributeConst.FLUSH, MessageConst.I_APPROVED.getMessage());
+
+            //一覧画面にリダイレクト
+            redirect(ForwardConst.ACT_REP, ForwardConst.CMD_INDEX);
         }
     }
 }
