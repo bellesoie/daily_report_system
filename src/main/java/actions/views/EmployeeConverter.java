@@ -46,7 +46,7 @@ public class EmployeeConverter {
      */
     public static EmployeeView toView(Employee e) {
 
-        if(e == null) {
+        if (e == null) {
             return null;
         }
 
@@ -59,7 +59,9 @@ public class EmployeeConverter {
                         ? null
                         : e.getAdminFlag() == JpaConst.ROLE_ADMIN
                                 ? AttributeConst.ROLE_ADMIN.getIntegerValue()
-                                : AttributeConst.ROLE_GENERAL.getIntegerValue(),
+                                : e.getAdminFlag() == JpaConst.ROLE_APPROVER
+                                        ? AttributeConst.ROLE_APPROVER.getIntegerValue()
+                                        : AttributeConst.ROLE_GENERAL.getIntegerValue(),
                 e.getCreatedAt(),
                 e.getUpdatedAt(),
                 e.getDeleteFlag() == null

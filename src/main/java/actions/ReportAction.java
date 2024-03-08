@@ -253,7 +253,7 @@ public class ReportAction extends ActionBase {
             ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
             //入力された日報内容を設定する
-            rv.setApproval("1");
+            rv.setApproval("2");
 
             //日報を承認する
             List<String> errors = service.update(rv);

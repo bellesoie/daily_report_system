@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="constants.ForwardConst"%>
+<%@ page import="constants.AttributeConst"%>
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
@@ -48,11 +49,11 @@
             </tbody>
         </table>
 
-        <c:if test="${sessionScope.login_employee.id == report.employee.id}">
+        <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_APPROVER.getIntegerValue()}">
 
             <form method="POST" action="?action=Report&command=approval">
-                <input type="hidden" name="id" value="1" />
-                <input type="hidden" name="_token" value="${_token}" />
+                <input type="hidden" name="id" value="2" /> <input type="hidden"
+                    name="_token" value="${_token}" />
                 <button type="submit">日報を承認</button>
             </form>
 
